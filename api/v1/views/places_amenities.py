@@ -2,10 +2,13 @@
 """
 places amenities
 """
-
+import sys
+sys.path.append('AirBnB_clone_v3')
 from flask import abort, jsonify
 from api.v1.views import app_views
-from models import storage, Amenity, Place
+from models import storage
+from models.amenity import Amenity
+from models.place import Place
 
 
 @app_views.route('/places/<place_id>/amenities', methods=['GET'])

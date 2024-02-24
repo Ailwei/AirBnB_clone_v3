@@ -2,21 +2,21 @@
 """
 states
 """
-
+import sys
+sys.path.append('/AirBnB_clone_v3')
 from flask import Flask, jsonify, request, abort
 from models import storage
-from models.states import State
+from models.state import State
+from api.v1.views import app_views
 
-app = Flask(__name__)
 
-
-@app.route('api/v1/states', methods=['GET'])
+@app_views.route('api/v1/states', methods=['GET'])
 def get_states():
     states = [state.to_dict() for state in storage.all(State).values()]
     return jsonify(states)
 
 
-@app.route('/api/v1/states/<state_id>', methods=['GET'])
+@app_views.route('/api/v1/states/<state_id>', methods=['GET'])
 def get_state(state_id):
     state = storage.get(State, state_id)
     if state is None:
@@ -24,7 +24,7 @@ def get_state(state_id):
     return jsonify(state.to_dict())
 
 
-@app.route('/api/v1/states/<state_id>', methods=['DELETE'])
+@app_views.route('/api/v1/states/<state_id>', methods=['DELETE'])
 def delete_states(state_id):
     state = storage.get(State, state_id)
     if state is None:
@@ -34,7 +34,7 @@ def delete_states(state_id):
     return jsonify({}), 200
 
 
-@app.router('/api/v1/states', methods=['POST'])
+@app_views.route('/api/v1/states', methods=['POST'])
 def create_state():
     if not request.json:
         abort(400, 'Not a JSON')
@@ -46,7 +46,7 @@ def create_state():
     return jsonify(sate.to_dict()), 201
 
 
-@app.route('/api/v1/states/>state_id>', methods=['PUT'])
+@app_views.route('/api/v1/states/>state_id>', methods=['PUT'])
 def update_state(state_id):
     state = storage.get(State, state_id)
     if state is None:
@@ -58,7 +58,3 @@ def update_state(state_id):
             setattr(sate, key, value)
     storage.save()
     return jsonify(state.to_dict()), 200
-
-
-if __name__ == '__main__':
-    app.run(host='0.0.0.0', port=5000)

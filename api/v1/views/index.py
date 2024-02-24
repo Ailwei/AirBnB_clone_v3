@@ -2,12 +2,14 @@
 """
 index file
 """
+import sys
+sys.path.append('/AirBnB_clone_v3')
 from flask import jsonify
-from city import City
-from place import Place
-from review import Review
-from user import User
-from state import State
+from models.city import City
+from models.place import Place
+from models.review import Review
+from models.user import User
+from models.state import State
 from api.v1.views import app_views
 from models import storage
 

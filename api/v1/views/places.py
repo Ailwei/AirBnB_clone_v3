@@ -2,7 +2,8 @@
 """
 places
 """
-import models
+import sys
+sys.path.append('/AiBnB_clone_v3')
 from api.v1.views import app_views
 from flask import jsonify, abort, request
 from models import storage
@@ -10,7 +11,6 @@ from models.place import Place
 from models.city import City
 from models.user import User
 
-app = Flask(__name__)
 
 
 @app_views.route('/cities/<city_id>/places', methods=['GET'])

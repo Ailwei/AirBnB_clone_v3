@@ -1,15 +1,20 @@
+#!/usr/bin/python3
+"""
+places reviews
+"""
+import sys
+sys.path.append('/AirBnB_clone_v3')
 from api.v1.views import app_views
 from flask import jsonify, abort, request
 from models import storage
 from models.review import Review
 from models.place import Place
 from models.user import User
-
-app = Flask(__name__)
+from api.v1.views import app_views
 
 @app_views.route('/places/<place_id>/reviews', methods=['GET'])
 def get_place_review(place_id):
-    place =storage.get( Place, place_id):
+    place =storage.get( Place, place_id)
     if place is None:
         abort(404)
     reviews = [review.to_dict() for review in place.reviews]
@@ -48,7 +53,7 @@ def create_review(place_id):
     if 'text' not in data:
         abort(400, 'Missing text')
     data['place_id'] = place_id
-    review = Review(?**data)
+    review = Review(**data)
     review.save()
     return jsonify(review.to_dict()), 201
 

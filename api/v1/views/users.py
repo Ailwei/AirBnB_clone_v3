@@ -1,9 +1,14 @@
+#!/usr/bin/python3
+"""
+user
+"""
+import sys
+sys.path.append('/AirBnB_clone_v3')
 from api.v1.views import app_views
 from flask import jsonify, abort, request
 from models import storage
 from models.user import User
 
-app = Flask(__name__)
 
 @app_views.route('/users', methods=['GET'])
 def get_user():
@@ -20,7 +25,7 @@ def get_user(user_id):
 @app_views.route('/users/<user_id>', methods=['DELETE'])
 def delete_user(user_id):
     user = storage.get(User, user_id)
-    if is not user:
+    if not user:
         abort(404)
         storage.delete(user)
         storage.save()

@@ -1,8 +1,11 @@
 #!/usr/bin/python3
 """
-error page
+flask app
 """
-from flask import Flask
+import os
+import sys
+sys.path.append('/AirBnB_clone_v3')
+from flask import Flask, jsonify
 from models import storage
 from flask import Blueprint
 from api.v1.views import app_views
