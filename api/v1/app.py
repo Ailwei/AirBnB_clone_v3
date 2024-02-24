@@ -1,12 +1,14 @@
+#!/usr/bin/python3
+"""
+error page
+"""
 from flask import Flask
 from models import storage
 from flask import Blueprint
 from api.v1.views import app_views
 from werkzeug.exceptions import NotFound
 from flask_cors import CORS
-"""
-error page
-"""
+
 
 app = Flask(__name__)
 app.register_blueprint(app_views, url_prefix='/api/v1')
