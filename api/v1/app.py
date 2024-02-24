@@ -16,10 +16,16 @@ app.register_blueprint(app_views, url_prefix='/api/v1')
 
 @app.teardown_appcontext
 def teardown(exception):
+    """
+    teardoen method
+    """
     storage.close()
 
 
 def handle_not_found_error(e):
+    """
+    handle not found error
+    """
     response = jsonify({"error": "Not found"})
     response.status_code = 404
     return response
