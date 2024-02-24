@@ -1,6 +1,12 @@
+#!/usr/bin/python3
+"""
+places amenities
+"""
+
 from flask import abort, jsonify
 from api.v1.views import app_views
 from models import storage, Amenity, Place
+
 
 @app_views.route('/places/<place_id>/amenities', methods=['GET'])
 def get_places_amenities(place_id):
@@ -9,6 +15,7 @@ def get_places_amenities(place_id):
         abort(404)
     amenities = [amenities.to_dict() for amenity in place.amenities]
     return jsonify(amenities)
+
 
 @app_views.route('/places/<place_id>/amenities/<amenity_id>', methods=['DELETE'])
 def delete_place_amenity(place_id, amenity_id):
@@ -23,6 +30,7 @@ def delete_place_amenity(place_id, amenity_id):
     place.amenities.remove(amenity)
     storage.save()
     return jsonify({}), 200
+
 
 @app_views.route('/places/<place_id>/amenities/<amenity_id>', methods=['POST'])
 def link_amenity_to_place(place_id, amenity_id):
