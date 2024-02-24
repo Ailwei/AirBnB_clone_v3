@@ -3,8 +3,14 @@
 index file
 """
 from flask import jsonify
+from city import City
+from place import Place
+from review import Review
+from user import User
+from state import State
 from api.v1.views import app_views
-from models import staorage
+from models import storage
+
 
 
 @app_views.route('/stats', methods=['GET'])

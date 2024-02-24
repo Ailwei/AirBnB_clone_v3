@@ -31,7 +31,7 @@ def handle_not_found_error(e):
     return response
 
 
-if '__name__' == '__main__':
+if __name__ == "__main__":
     """
     main function
     """
