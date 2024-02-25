@@ -9,7 +9,7 @@ from flask import Flask, jsonify
 from models import storage
 from flask import Blueprint
 from api.v1.views import app_views
-from werkzeug.exceptions import NotFound
+#from werkzeug.exceptions import NotFound
 from flask_cors import CORS
 
 
