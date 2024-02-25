@@ -25,7 +25,7 @@ def get_places_by_cityid(city_id):
     return jasonify(places)
 
 
-@app_views.route('/places/<place_id>', methos=['GET'])
+@app_views.route('/places/<place_id>', methods=['GET'])
 def get_places(place_id):
     """
     retrieve places
@@ -50,7 +50,7 @@ def delete_place(place_id):
     return jsonify({}), 200
 
 
-@app_views.route('/cities/<city_id>/places', methodos=['POST'])
+@app_views.route('/cities/<city_id>/places', methods=['POST'])
 def create_place(city_id):
     """
     create place

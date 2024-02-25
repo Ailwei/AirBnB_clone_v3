@@ -1,3 +1,7 @@
+#!/usr/bin/python3
+
+import sys
+sys.path.append('/AirBnB_clone_v3')
 from api.v1.views import app_views
 from flask import jsonify, abort, request
 from models import storage

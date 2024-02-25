@@ -12,7 +12,7 @@ from models.user import User
 from models.state import State
 from api.v1.views import app_views
 from models import storage
-
+from models.amenity import Amenity
 
 
 @app_views.route('/stats', methods=['GET'])

@@ -14,6 +14,9 @@ from flask_cors import CORS
 
 
 app = Flask(__name__)
+
+CORS(app)
+
 app.register_blueprint(app_views, url_prefix='/api/v1')
 
 
@@ -24,7 +27,7 @@ def teardown(exception):
     """
     storage.close()
 
-
+@app.errorhandler(404)
 def handle_not_found_error(e):
     """
     handle not found error
