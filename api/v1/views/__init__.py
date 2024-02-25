@@ -3,7 +3,7 @@
 Blueprint for API
 """
 import sys
-sys.path.append('/AirBnB_clone_v3/')
+sys.path.append('/AirBnB_clone_v3')
 #from api.v1.views import app_views
 from flask import Blueprint
 
