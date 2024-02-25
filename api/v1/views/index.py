@@ -16,7 +16,7 @@ from models import storage
 from models.amenity import Amenity
 
 
-@app_views.route('/status', methods=['GET'])
+@app_views.route('/status', methods=['GET'], strict_slashes=False)
 def get_status():
     """
     get status method
@@ -24,7 +24,7 @@ def get_status():
     return jsonify({"status": "OK"})
 
 
-@app_views.route('/stats', methods=['GET'])
+@app_views.route('/stats', methods=['GET'], strict_slashes=False)
 def get_stats():
     """
     Retrieve number of each objects by type

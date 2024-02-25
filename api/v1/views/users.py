@@ -10,7 +10,7 @@ from models import storage
 from models.user import User
 
 
-@app_views.route('/users', methods=['GET'])
+@app_views.route('/users', methods=['GET'], strict_slashes=False)
 def get_users():
     """
     get users
@@ -20,7 +20,7 @@ def get_users():
     return jsonify(users)
 
 
-@app_views.route('/user/<user_id>', methods=['GET'])
+@app_views.route('/user/<user_id>', methods=['GET'], strict_slashes=False)
 def get_user(user_id):
     """
     get user
@@ -31,7 +31,7 @@ def get_user(user_id):
     return jsonify(user.to_dict())
 
 
-@app_views.route('/users/<user_id>', methods=['DELETE'])
+@app_views.route('/users/<user_id>', methods=['DELETE'], strict_slashes=False)
 def delete_user(user_id):
     """
     delete user
@@ -44,7 +44,7 @@ def delete_user(user_id):
     return jsonify({}), 200
 
 
-@app_views.route('/users', methods=['PUT'])
+@app_views.route('/users', methods=['PUT'], strict_slashes=False)
 def create_user():
     """
     create user
@@ -61,7 +61,7 @@ def create_user():
     return jsonify(user.to_dict()), 201
 
 
-@app_views.route('/users/<user_id>', methods=['PUT'])
+@app_views.route('/users/<user_id>', methods=['PUT'], strict_slashes=False)
 def update_user(user_id):
     """
     update user
