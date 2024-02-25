@@ -6,14 +6,14 @@ index file
 import sys
 sys.path.append('/AirBnB_clone_v3')
 from flask import jsonify
-# from models.city import City
-# from models.place import Place
-# from models.review import Review
-# from models.user import User
-# from models.state import State
+from models.city import City
+from models.place import Place
+from models.review import Review
+from models.user import User
+from models.state import State
 from api.v1.views import app_views
 from models import storage
-# from models.amenity import Amenity
+from models.amenity import Amenity
 
 
 @app_views.route('/status', methods=['GET'])
@@ -26,13 +26,6 @@ def get_status():
 
 @app_views.route('/stats', methods=['GET'])
 def get_stats():
-    """
-    get stats
-    """
-    return number_of_objects()
-
-
-def number_objects():
     """
     Retrieve number of each objects by type
     """
