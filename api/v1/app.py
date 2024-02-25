@@ -15,7 +15,7 @@ from flask_cors import CORS
 
 app = Flask(__name__)
 
-CORS(app, resources={r"/api/*": {"origins": "0.0.0.0"}})
+CORS(app, resources={r"/api/*": {"origins": "*"}})
 
 app.register_blueprint(app_views, url_prefix='/api/v1')
 
@@ -42,10 +42,6 @@ if __name__ == "__main__":
     """
     main function
     """
-    host = os.getenv('HBNB_API_HOST', '0.0.0.0')
-    port = os.getenv('HBNB_API_PORT', 5000)
-    if not host:
-        host = '0.0.0.0.0'
-    if not port:
-        port = '5000'
+    host = os.environ.get('HBNB_API_HOST', '0.0.0.0')
+    port = int(os.environ.get('HBNB_API_PORT', 5000))
     app.run(host=host, port=port, threaded=True)
