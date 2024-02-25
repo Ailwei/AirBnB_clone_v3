@@ -17,7 +17,7 @@ def get_cities_by_state(state_id):
     get cities by state
     """
     state = storage.get(State, state_id)
-    if state is None:
+    if not state:
         abort(404)
     cities = [city.yo_dict() for city in state.cities]
     return jsonify(cities)
@@ -29,7 +29,7 @@ def get_city(state_id):
     get cities
     """
     city = storage.get(City, city_id)
-    if city is None:
+    if not city:
         abort(404)
     return jsonify(city.to_dict())
 
