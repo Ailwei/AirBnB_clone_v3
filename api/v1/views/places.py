@@ -30,7 +30,7 @@ def get_places(place_id):
     """
     retrieve places
     """
-    place = storage.get(Place, palce_id)
+    place = storage.get(Place, place_id)
     if not place:
         abort(404)
     return jsonify(place.to_dict())
@@ -62,14 +62,14 @@ def create_place(city_id):
     if not request.json:
         abort(400, 'Not a JSON')
 
-    if 'user_id' not in request.json:
+    if 'user_id' not in request.json():
         abort(400, 'Missing user_id')
 
         user_id = request.json['user_id']
         user_id = storage.get(User, user_id)
     if not user:
         abort(404)
-    if 'name' not in request.jason:
+    if 'name' not in request.jason():
         abort(400, 'Missing name')
     place_data = request.get_json()
     place_data['city_id'] = city_id
