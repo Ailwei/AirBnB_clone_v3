@@ -14,7 +14,7 @@ from api.v1.views import app_views
 
 
 @app_views.route('/places/<place_id>/reviews', methods=['GET'])
-def get_place_review(place_id)i:
+def get_place_reviews(place_id):
     """
     get place reviews
     """

@@ -1,0 +1,39 @@
+#!/bin/bash
+
+# Set the MySQL login details
+MYSQL_USER="hbnb_dev"
+MYSQL_PASSWORD="hbnb_dev_pwd"
+MYSQL_HOST="localhost"
+MYSQL_DATABASE="hbnb_dev_db"
+
+# Check if the places table already exists
+if mysql -u"$MYSQL_USER" -p"$MYSQL_PASSWORD" -h"$MYSQL_HOST" "$MYSQL_DATABASE" -e "DESCRIBE places" >/dev/null 2>&1; then
+    echo "Table 'places' already exists. Skipping creation."
+    exit 0
+fi
+
+# SQL commands to create the places table
+SQL_COMMANDS=$(cat <<EOF
+CREATE TABLE places (
+    created_at DATETIME, 
+    updated_at DATETIME, 
+    id String(60) NOT NULL, 
+    city_id String(60) NOT NULL, 
+    user_id String(60) NOT NULL, 
+    name VARCHAR(128) NOT NULL, 
+    description VARCHAR(1024), 
+    number_rooms INTEGER NOT NULL, 
+    number_bathrooms INTEGER NOT NULL, 
+    max_guest INTEGER NOT NULL, 
+    price_by_night INTEGER NOT NULL, 
+    latitude FLOAT, 
+    longitude FLOAT, 
+    PRIMARY KEY (id), 
+    FOREIGN KEY (city_id) REFERENCES cities (id),
+    FOREIGN KEY (user_id) REFERENCES users (id)
+);
+EOF
+)
+
+# Execute the SQL commands
+mysql -u"$MYSQL_USER" -p"$MYSQL_PASSWORD" -h"$MYSQL_HOST" "$MYSQL_DATABASE" -e "$SQL_COMMANDS"

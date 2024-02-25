@@ -10,6 +10,7 @@ import sqlalchemy
 from sqlalchemy import Column, String, DateTime
 from sqlalchemy.ext.declarative import declarative_base
 import uuid
+import hashlib
 
 time = "%Y-%m-%dT%H:%M:%S.%f"
 
@@ -73,3 +74,21 @@ class BaseModel:
     def delete(self):
         """delete the current instance from the storage"""
         models.storage.delete(self)
+
+
+class User(BaseModel):
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        if 'password' in kwargs:
+            self.password = hashlib.md5(
+                    kwargs['password'].encode()).hexdigest()
+        else:
+            self.password = ""
+
+    @property
+    def password(self):
+        return self.__password
+
+    @password.setter
+    def password(self, value):
+        self.__password = hashlib.md5(value.encode()).hexdigest()

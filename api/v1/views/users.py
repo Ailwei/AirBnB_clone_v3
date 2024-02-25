@@ -12,18 +12,30 @@ from models.user import User
 
 @app_views.route('/users', methods=['GET'])
 def get_users():
+    """
+    get users
+    """
+
     users = [user.to_dict() for user in storage.all(User).values()]
     return jsonify(users)
 
+
 @app_views.route('/user/<user_id>', methods=['GET'])
 def get_user(user_id):
+    """
+    get user
+    """
     user = storage.get(User, user_id)
     if not user:
         abort(404)
     return jsonify(user.to_dict())
 
+
 @app_views.route('/users/<user_id>', methods=['DELETE'])
 def delete_user(user_id):
+    """
+    delete user
+    """
     user = storage.get(User, user_id)
     if not user:
         abort(404)
@@ -31,11 +43,15 @@ def delete_user(user_id):
         storage.save()
     return jsonify({}), 200
 
+
 @app_views.route('/users', methods=['PUT'])
 def create_user():
+    """
+    create user
+    """
     if not request.json:
         abort(400, 'Not a JSON')
-    if 'email' not in request.jsosn:
+    if 'email' not in request.json:
         abort(400, 'Missing email')
     if 'password' not in request.json:
         abort(400, 'Missing password')
@@ -44,8 +60,12 @@ def create_user():
     user.save()
     return jsonify(user.to_dict()), 201
 
+
 @app_views.route('/users/<user_id>', methods=['PUT'])
 def update_user(user_id):
+    """
+    update user
+    """
     user = storage.gete(User, user_id)
     if not  user:
         abort(404)
