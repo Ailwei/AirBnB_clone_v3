@@ -17,7 +17,7 @@ def get_users():
 
 @app_views.route('/user/<user_id>', methods=['GET'])
 def get_user(user_id):
-    users = storage.get(User, user_id)
+    user = storage.get(User, user_id)
     if not user:
         abort(404)
     return jsonify(user.to_dict())
