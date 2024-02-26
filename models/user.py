@@ -6,6 +6,7 @@ from os import getenv
 import sqlalchemy
 from sqlalchemy import Column, String
 from sqlalchemy.orm import relationship
+import hashlib
 
 
 class User(BaseModel, Base):
@@ -28,14 +29,16 @@ class User(BaseModel, Base):
         """initializes user"""
         super().__init__(*args, **kwargs)
 
-    def to_dict(self, save_password=False):
+    @property
+    def password(self):
         """
-        Return a dictory represantion of dict
+        password getter
         """
-        dict_copy = self.__dict__.copy()
-        if not save_password and 'password' in dict_copy:
-            del dict_copy['password']
-        dict_copy['created_at'] = self.created_at.isoformat()
-        dict_copy['updated_at'] = self.updated_at.isoformat()
-        dict_copy['__class__'] = self.__class__.__name__
-        return dict_copy
+        return self.__password
+
+    @password.setter
+    def password(self, pwd):
+        """
+        password setter
+        """
+        self.__password = hashlib.md5(pwd.encode()).hexdigest()
