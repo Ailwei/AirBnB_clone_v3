@@ -66,7 +66,8 @@ test_file_storage.py'])
                              "{:s} method needs a docstring".format(func[0]))
             self.assertTrue(len(func[1].__doc__) >= 1,
                             "{:s} method needs a docstring".format(func[0]))
-     def test_get_and_count(self):
+
+    def test_get_and_count(self):
         """Test get and count methods"""
         state_count = storage.count(State)
         self.assertEqual(state_count, 5)
