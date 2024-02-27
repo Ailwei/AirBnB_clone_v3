@@ -2,26 +2,28 @@
 """
 flask app
 """
+
+# imports
 import os
 import sys
 sys.path.append('/AirBnB_clone_v3')
 from flask import Flask, jsonify
 from models import storage
-from flask import Blueprint
+# from flask import Blueprint
 from api.v1.views import app_views
 # from werkzeug.exceptions import NotFound
-from flask_cors import CORS
+# from flask_cors import CORS
 
 
 app = Flask(__name__)
 
-CORS(app, resources={r'/api/v1/*': {'origins': '0.0.0.0'}})
+# CORS(app, resources={r'/api/v1/*': {'origins': '0.0.0.0'}})
 
 
-app.register_blueprint(app_views, url_prefix='/api/v1')
-app.url_map.strict_slashes = False
+app.register_blueprint(app_views)
 
 
+# tear down methods
 @app.teardown_appcontext
 def teardown(exception):
     """
@@ -30,6 +32,7 @@ def teardown(exception):
     storage.close()
 
 
+# error handling
 @app.errorhandler(404)
 def handle_not_found_error(e):
     """
